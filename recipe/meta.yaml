@@ -20,6 +20,7 @@ requirements:
     - python {{ python_min }}
     - pip
     - setuptools
+    - flit
   run:
     - python >={{ python_min }}
     - absl-py >=0.9.0
