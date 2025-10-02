@@ -1,5 +1,5 @@
 {% set name = "distrax" %}
-{% set version = "0.1.5" %}
+{% set version = "0.1.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/google-deepmind/distrax/archive/v{{ version }}.tar.gz
-  sha256: 9a75f81c2267f69115a48bd0a5f4b729406a22556e9f90c15e93d79962f97a7e
+  sha256: 66ad1adc84c592c6a3e225103e0af902d2247a4b76b5bb3e8dbbf4b3e2904cc2
   patches:
     - 01-exclude-examples.patch
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
