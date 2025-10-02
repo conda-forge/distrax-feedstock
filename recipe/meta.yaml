@@ -9,8 +9,6 @@ package:
 source:
   url: https://github.com/google-deepmind/distrax/archive/v{{ version }}.tar.gz
   sha256: 66ad1adc84c592c6a3e225103e0af902d2247a4b76b5bb3e8dbbf4b3e2904cc2
-  patches:
-    - 01-exclude-examples.patch
 
 build:
   noarch: python
