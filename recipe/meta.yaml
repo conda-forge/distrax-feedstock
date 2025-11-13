@@ -1,5 +1,6 @@
 {% set name = "distrax" %}
-{% set version = "0.1.5" %}
+{% set version = "0.1.7" %}
+{% set python_min = "3.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,34 +8,40 @@ package:
 
 source:
   url: https://github.com/google-deepmind/distrax/archive/v{{ version }}.tar.gz
-  sha256: 9a75f81c2267f69115a48bd0a5f4b729406a22556e9f90c15e93d79962f97a7e
-  patches:
-    - 01-exclude-examples.patch
+  sha256: 66ad1adc84c592c6a3e225103e0af902d2247a4b76b5bb3e8dbbf4b3e2904cc2
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
     - python {{ python_min }}
     - pip
     - setuptools
+    - flit
   run:
     - python >={{ python_min }}
-    - absl-py >=0.9.0
-    - chex >=0.1.8
-    - jax >=0.1.55
-    - jaxlib >=0.1.67
-    - numpy >=1.23.0
-    - tensorflow-probability >=0.15.0
+    - absl-py >=2.3.1
+    - chex >=0.1.90
+    - jax >=0.7.0
+    - jaxlib >=0.7.0
+    - numpy >=1.24.1
+    - tensorflow-probability >=0.25.0
 
 test:
   requires:
     - python {{ python_min }}
+    - pytest
+    - dm-haiku
+    - flax
+    - mock
   imports:
     - distrax
+  commands:
+    # Run a subset of tests to avoid OOM
+    - JAX_DISABLE_MOST_OPTIMIZATIONS=True pytest --pyargs distrax -k "a_test" -k "r_test" -k "k_test"
 
 about:
   home: https://github.com/deepmind/distrax
