@@ -1,5 +1,5 @@
 {% set name = "distrax" %}
-{% set version = "0.1.7" %}
+{% set version = "0.1.8" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/google-deepmind/distrax/archive/v{{ version }}.tar.gz
-  sha256: 66ad1adc84c592c6a3e225103e0af902d2247a4b76b5bb3e8dbbf4b3e2904cc2
+  sha256: 09223808e725e30e5ca620831505603937e8d7625d7d3c1cbc00dbdb5ebba2ca
 
 build:
   noarch: python
@@ -22,6 +22,7 @@ requirements:
     - setuptools
     - flit
   run:
+    - tfp-nightly
     - python >={{ python_min }}
     - absl-py >=2.3.1
     - chex >=0.1.90
