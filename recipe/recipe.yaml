@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  name: distrax
+  version: "0.1.8"
+  python_min: "3.11"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/google-deepmind/distrax/archive/v${{ version }}.tar.gz
+  sha256: 09223808e725e30e5ca620831505603937e8d7625d7d3c1cbc00dbdb5ebba2ca
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python 3.11.*
+    - pip
+    - setuptools
+    - flit
+  run:
+    - python >=${{ python_min }}
+    - absl-py >=2.3.1
+    - chex >=0.1.90
+    - jax >=0.7.0
+    - jaxlib >=0.7.0
+    - numpy >=1.24.1
+    - tensorflow-probability >=0.25.0
+
+tests:
+  - python:
+      imports:
+        - distrax
+      pip_check: false
+      python_version: ${{ python_min }}
+  - requirements:
+      run:
+        - python ${{ python_min }}
+        - pytest
+        - dm-haiku
+        - flax
+        - mock
+    script:
+      - JAX_DISABLE_MOST_OPTIMIZATIONS=True pytest --pyargs distrax -k "a_test" -k "r_test" -k "k_test"
+
+about:
+  summary: "Distrax: Probability distributions in JAX."
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/deepmind/distrax
+
+extra:
+  recipe-maintainers:
+    - traversaro
+    - flferretti
+
