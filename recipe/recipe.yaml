@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: distrax
-  version: "0.1.8"
+  version: "0.1.9"
   python_min: "3.11"
 
 package:
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://github.com/google-deepmind/distrax/archive/v${{ version }}.tar.gz
-  sha256: 09223808e725e30e5ca620831505603937e8d7625d7d3c1cbc00dbdb5ebba2ca
+  sha256: 4b9c68f1e432287c41b15f67a4dbc655525509cedd2bc130095c768fd7cd382a
 
 build:
   number: 0
